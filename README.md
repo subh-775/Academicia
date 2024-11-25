@@ -1,2 +1,2 @@
 # Academicia
-Random stuffs 
+## Random stuffs for laboratory works..
