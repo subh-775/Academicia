@@ -1,2 +1,2 @@
 # Academicia
-## Random stuffs for laboratory works..
+## Random stuffs Containing Academics Dilemma's ☠️..
