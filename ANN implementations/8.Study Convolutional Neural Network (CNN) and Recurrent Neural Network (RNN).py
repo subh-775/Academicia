@@ -13,3 +13,16 @@ model = Sequential([
 ])
 
 model.summary()
+
+# Example for RNN
+
+from tensorflow.keras.layers import SimpleRNN
+
+# Define RNN model
+model = Sequential([
+    SimpleRNN(50, activation='relu', input_shape=(seq_length, 1)),
+    Dense(1)
+])
+
+model.summary()
+
