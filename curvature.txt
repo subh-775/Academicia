@@ -1,0 +1,177 @@
+# SCOLIOSIS
+
+## Definition
+Scoliosis is an abnormal lateral curvature of the spine. It is most often diagnosed in childhood or early adolescence.
+
+The spine's normal curves occur at the cervical, thoracic, and lumbar regions in the "sagittal" plane. These natural curves position the head over the pelvis and work as shock absorbers to distribute mechanical stress during movement. 
+
+Scoliosis is often defined as spinal curvature in the "coronal" (frontal) plane. While the degree of curvature is measured on the coronal plane, scoliosis is a more complex, three-dimensional problem that involves the following planes:
+
+1. Coronal plane
+2. Sagittal plane
+3. Axial plane
+
+## Anatomical Planes
+- The coronal plane is vertical from head to foot and parallel to the shoulders, dividing the body into anterior (front) and posterior (back) sections.
+- The sagittal plane divides the body into right and left halves.
+- The axial plane is parallel to the plane of the ground and at right angles to the coronal and sagittal planes.
+
+## Key Characteristics
+- Scoliosis is defined by the Cobb's angle of spine curvature in the coronal plane and is often accompanied by vertebral rotation in the transverse plane and hypokyphosis in the sagittal plane.
+- These abnormalities in the spine, costal-vertebral joints, and the rib cage produce a 'convex' and 'concave' hemithorax.
+- The rotation component starts when the scoliosis becomes more pronounced. This is called a torsion-scoliosis, causing a gibbus.
+
+## Clinically Relevant Anatomy
+The vertebral column normally consists of:
+- 24 separate bony vertebrae
+- 5 fused vertebrae that form the sacrum
+- Usually 4 fused vertebrae that form the coccyx
+
+### Regions of the spine
+- 7 cervical vertebrae
+- 12 thoracic vertebrae
+- 5 lumbar vertebrae
+
+Variations can occur such as hemi-vertebrae and fused vertebrae.
+
+### Normal Spinal Curves
+When viewed from the side, the vertebral column displays five curves in the upright posture:
+
+#### Cervical Curves
+- Two normally occurring curves in the cervical spine:
+  - The upper cervical curve extending from the occiput to the axis
+  - The longer lordotic curve of the lower cervical spine extending from the axis to the second thoracic vertebrae
+- The upper cervical curve is convex forwards and is the reverse of the lower cervical curve.
+
+#### Thoracic Curve
+- Concave forwards, extending from T2 to T12
+- The concavity is due to the greater depth of the posterior parts of the vertebral bodies in this region
+- In the upper part, there is often a slight lateral curve with the convexity directed to either the right or left
+
+#### Lumbar Curve
+- Convex forwards and extends from L1 to the lumbosacral junction
+
+#### Sacral Curve
+- Extends from the lumbosacral junction to the coccyx
+- Anterior concavity faces downwards and forwards
+
+## Epidemiology
+- Scoliosis affects 2-3 percent of the population, or an estimated six to nine million people in the United States.
+- Scoliosis can develop in infancy or early childhood.
+- The primary age of onset for scoliosis is 10-15 years old, occurring equally among both genders.
+- Females are eight times more likely to progress to a curve magnitude that requires treatment.
+- Every year, scoliosis patients make more than 600,000 visits to private physician offices, an estimated 30,000 children are fitted with a brace and 38,000 patients undergo spinal fusion surgery (US figures).
+
+## Classification
+Scoliosis can be classified by etiology: idiopathic, congenital, or neuromuscular.
+
+### Idiopathic Scoliosis
+- The diagnosis when all other causes are excluded and comprises about 80 percent of all cases.
+- Adult scoliosis has a prevalence of more than 8% in adults over the age of 25 and rises to 68% in those over 60 years, caused by degenerative changes in the aging spine.
+- Prevalence of 2.5% in the general population with a Cobb angle larger than 10 degrees.
+- Adolescent idiopathic scoliosis is the most common type of scoliosis and is usually diagnosed during puberty.
+
+#### Subgroups of Idiopathic Scoliosis:
+1. **Infantile Scoliosis**: 
+   - Develops at the age of 0-3 years
+   - Shows a prevalence of 1%
+
+2. **Juvenile Scoliosis**: 
+   - Develops at the age of 4-10 years
+   - Comprises 10-15% of all idiopathic scoliosis in children
+   - Untreated curves may cause serious cardiopulmonary complications
+   - Curves of 30° and more tend to progress
+   - 95% of these patients need a surgical procedure
+
+3. **Adolescent Scoliosis**: 
+   - Develops at the age of 11-18 years
+   - Accounts for approximately 90% of cases of idiopathic scoliosis in children
+
+### Congenital Scoliosis
+- Results from embryological malformation of one or more vertebrae and may occur in any location of the spine.
+- The vertebral abnormalities cause curvature and other deformities of the spine because one area of the spinal column lengthens at a slower rate than the rest.
+- The geometry and location of the abnormalities determine the rate at which scoliosis progresses in magnitude as the child grows.
+- As these abnormalities are present at birth, congenital scoliosis is usually detected at a younger age than idiopathic scoliosis.
+
+### Neuromuscular Scoliosis
+- Encompasses scoliosis that is secondary to neurological or muscular diseases.
+- Includes scoliosis associated with cerebral palsy, spinal cord trauma, muscular dystrophy, spinal muscular atrophy and spina bifida.
+- This type of scoliosis generally progresses more rapidly than idiopathic scoliosis and often requires surgical treatment.
+
+*Note: Injuries and infections to the spine can also contribute to the cause of scoliosis.*
+
+## Clinical Presentation
+There are several signs that may indicate the possibility of scoliosis:
+
+- Sideways curvature of the spine
+- Sideways body posture
+- One shoulder raised higher than the other
+- One hip is more prominent than the other
+- Clothes not hanging properly
+- Local muscular aches
+- Local ligament pain
+- Decreasing pulmonary function is a major concern in progressive severe scoliosis with a Cobb angle of more than 100 degrees after completion of growth
+
+### Pain and Associated Conditions
+- About 23 percent of patients with idiopathic scoliosis present with back pain at the time of initial diagnosis.
+- Ten percent of these patients are found to have an underlying associated condition such as:
+  - Spondylolisthesis
+  - Syringomyelia
+  - Tethered cord
+  - Herniated disc
+  - Spinal tumor
+- If a patient with diagnosed idiopathic scoliosis has more than mild back discomfort, a thorough evaluation for another cause of pain is advised.
+
+### Pulmonary Function
+- Due to changes in the shape and size of the thorax, idiopathic scoliosis may affect pulmonary function.
+- Recent reports on pulmonary function testing in patients with mild to moderate idiopathic scoliosis showed diminished pulmonary function.
+- Impairment of function was seen in more severe cases of spinal deformity, proximally-located curvature, and older patients.
+
+## Diagnosis
+- Scoliosis is usually confirmed through:
+  - Physical examination
+  - X-ray
+  - Spinal radiograph
+  - CT scan
+  - MRI
+- The curve is measured by the Cobb Method and is diagnosed in terms of severity by the number of degrees.
+- A standard exam that is sometimes used by pediatricians and in grade school screenings is called the Adam's Forward Bend Test.
+
+## Outcome Measures
+Evaluation of scoliosis treatment should include the patient's perspective, obtained with the use of patient-reported outcome measures:
+
+- SF-36 questionnaire and the EuroQol5D instrument
+- SRS-22 Patient Questionnaire and the quality of life profile for spinal deformities (QLPSD)
+- The perception of the trunk deformity and body image according to the patient can be assessed by several instruments:
+  - Walter-Reed Visual Assessment Scale (WRVAS)
+  - Spinal Appearance Questionnaire (SAQ)
+  - Trunk Appearance Perception Scale (TAPS)
+- The impacts of the brace use can be measured with specific scales:
+  - Bad Sobernheim Stress Questionnaire (BSSQ)
+  - Brace Questionnaire (BrQ)
+
+*Note: Available instruments to evaluate the treatment for non-idiopathic scoliosis have not been sufficiently validated and analyzed.*
+
+## Examination
+The aim of the functional examination is to distinguish between faulty posture and actual idiopathic scoliosis:
+
+1. Examination of the active movements (flexion, extension, and side flexion) of the spine in the cervical, thoracic, and lumbar segments.
+
+2. The Adam forward bend test can be used to make a distinction between structural scoliosis or non-structural scoliosis of the cervical to lumbar spine. The test can be performed in the standing and sitting position.
+
+3. The Cobb angle is a standard measurement to determine and track the progression of scoliosis.
+
+4. The scoliometer is an inclinometer designed to measure trunk asymmetry or axial trunk rotation. It's used at three areas:
+   - Upper thoracic (T3-T4)
+   - Middle thoracic (T5-T12)
+   - Thoraco-lumbar area (T12-L1 or L2-L3)
+
+   If the measurement is equal to 0°, there is symmetry at the particular level of the trunk. An asymmetry at the particular level of the trunk is found if the scoliometer measurement is equal to any other value.
+
+5. Pulmonary function testing is useful in the preoperative evaluation of patients.
+   - Spirometer:
+     - FVC gives an assessment of lung volume
+     - FEV1 provides an assessment of flow function
+
+## Medical Management
+Patients with early-onset scoliosis, defined as a lateral curvature of the spine under the age of 10 years, are offered surgical treatment when the major curvature remains progressive despite conservative treatment (Cobb angle 50 degrees or more). Spinal fusion is not recommended in this age group, as it prevents spinal growth and pulmonary development.
