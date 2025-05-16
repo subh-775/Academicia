@@ -1,0 +1,351 @@
+--Background--
+Scoliosis is a medical condition characterized by an abnormal lateral curvature of the spine, resembling the S or C shape, often diagnosed during adolescence but also affecting adults. Traditional diagnosis and monitoring heavily rely on radiographic imaging (X-rays), which, while accurate, poses risks due to repeated exposure to ionizing radiation. Moreover, radiological assessments require specialized equipment and clinical expertise, making routine follow-up and large scale screening both costly and inaccessible for many individuals—particularly in remote or underserved regions.
+Recent advances in computer vision and 3D reconstruction have enabled new avenues for non-invasive scoliosis assessment using consumer-grade devices such as smartphones.
+In particular, monocular 3D reconstruction techniques, which generate three-dimensional geometry from a single camera input (typically video), provide a promising low-cost, accessible alternative to traditional imaging. By capturing a video of a person’s back in a specific posture and reconstructing its 3D mesh using photogrammetry pipelines such as COLMAP (for structure-from-motion and sparse reconstruction) and OpenMVS (for dense reconstruction and mesh generation), it becomes possible to extract spinal curvature information and perform automated scoliosis assessments.
+
+However, achieving consistent and clinically-relevant accuracy with monocular 3D reconstruction in unconstrained environments poses substantial challenges. The quality of 3D reconstruction is highly sensitive to input video conditions—such as camera angle, lighting uniformity, and surface texture. Minor inconsistencies in video capture can lead to significant distortions in the reconstructed mesh, leading to erroneous curvature estimations.
+The proposed method addresses this bottleneck by introducing guided video acquisition techniques through two key innovations: (1) optimal overhead camera angle determination and (2)controlled illumination and pattern projection (using an external smartphone-based attachment or other setup). These solutions—developed and validated experimentally—form the basis for improving the robustness of the scoliosis detection pipeline without requiring clinical hardware.
+
+Through this work, we aim to bridge the gap between clinical-grade spinal diagnostics and at-home assessments, enabling safer, radiation-free, and repeatable scoliosis screening using only a mobile phone and minimal accessories.
+
+--Motivation--
+The motivation behind this research lies in democratizing access to scoliosis assessment and making spinal health monitoring scalable, safe, and reliable. In the current healthcare landscape, routine scoliosis checks remain limited to hospital settings due to dependence on radiographic equipment and specialist interpretation. For patients—particularly children—this creates an additional burden of frequent hospital visits and exposure to repeated doses of X-rays, even in cases of minor or non-progressive curves.
+Given the increasing prevalence of smartphone technology and advances in mobile computer vision, there is an emerging opportunity to shift scoliosis screening to an at-home model. However, prior attempts using unstructured video data for 3D reconstruction have resulted in poor accuracy, limiting clinical applicability. The quality of 3D mesh generation suffers from factors such as non-uniform lighting, unoptimized camera angles, and texture less skin surfaces—conditions that are common in uncontrolled environments.
+To overcome these challenges, this thesis proposes a comprehensive and reproducible framework for guided monocular 3D reconstruction of the human back. The first key motivator is to establish empirically derived recording guidelines—such as the optimal phone placement angle—so as to maximize the visibility of key anatomical landmarks relevant to spine curvature detection. The second motivator is to enhance surface feature visibility using controlled illumination and pattern projection, where a physical accessory attached to the phone flashlight projects structured patterns (e.g., shaped, lines, etc.) that assist photogrammetry algorithms in feature matching and alignment. This combination of physical setup and computational processing is designed to ensure that even in low-resource settings or non-clinical environments, accurate scoliosis estimation becomes feasible with no need for radiographic imaging. Ultimately, the vision is to enable mass adoption of mobile scoliosis screening, promote early detection in school-aged children, support remote clinical consultations, and contribute to the development of safer and smarter diagnostic tools in the future of telemedicine.
+
+
+--Smartphone Based video Acquisition--
+This chapter explores the carefully designed input acquisition protocol developed as part of the proposed method. It describes how the input video is recorded using a mobile device under standardized conditions to maximize the anatomical visibility of the spine and surrounding structures. The methodology addresses posture control, camera placement, motion minimization, and scene lighting. It further introduces two innovations designed to enhance input quality: (1) a novel approach for achieving optimal recording angles empirically, and (2) the design and application of a flashlight-mounted pattern projection module. These hardware and procedural innovations directly contribute to better photogrammetric correspondence, improved mesh resolution, and ultimately, more accurate scoliosis assessment from the generated 3D mesh.
+ Through extensive experimentation and iterations, a complete pipeline was developed that integrates user-friendly input recording with advanced 3D reconstruction algorithms like COLMAP and OpenMVS. The result is a reproducible, clinically meaningful scoliosis estimation framework that operates entirely on smartphone-based input without any invasive procedures or radiation exposure. The contributions made at the input level have been formally documented and protected through patent applications, further affirming the novelty and practical impact of the proposed methods.
+
+--Structure Video capture for 3D Scoliosis Assessment--
+Capturing input video in a structured and repeatable manner is vital to ensure successful 3D reconstruction using photogrammetric techniques. The proposed pipeline begins with the subject assuming a clinically inspired posture that mimics common visual inspection practices used by orthopedic specialists. Specifically, the subject is asked to perform a forward bend with both shoulders relaxed and arms hanging freely. This posture exposes the scapula, spinal line, and lumbar curvature—critical visual cues for estimating scoliosis severity.
+ The smartphone is positioned overhead, directly perpendicular to the subject’s back. This top-down view captures the curvature in the frontal plane, which is most relevant for identifying lateral deviations in the spine. The height of the phone is chosen based on empirical trials to ensure full coverage from the cervical to the sacral regions without introducing fisheye distortion or perspective errors. The video duration is set between 10 to 15 seconds, long enough to allow sufficient frame overlap and parallax for structure from-motion algorithms while being short enough to avoid posture drift in the subject.
+
+Throughout the recording, the phone is held steady or mounted on a stable frame. Subjects are instructed to remain motionless during the capture. Illumination plays a key role; uncontrolled lighting can introduce harsh shadows or bright hotspots, which may interfere with surface feature detection. The environment is thus chosen or modified to offer uniform diffuse lighting—either natural light from multiple windows or controlled artificial lights. The background is also kept neutral to avoid visual distractions or texture artifacts during reconstruction.
+
+This standardized method of video capture ensures that each recording delivers data-rich, geometrically consistent frames for accurate 3D mesh reconstruction. By minimizing external variabilities and focusing on anatomical visibility, the proposed input acquisition strategy lays the foundation for reliable and repeatable scoliosis assessments. This structure was iteratively refined through pilot studies and plays a critical role in the effectiveness of the full diagnostic system.
+
+--Novel Input Enhancements and Their Impact--
+Although monocular 3D reconstruction offers accessibility, its success relies heavily on the quality of visual features available in the input frames. In practice, many human back surfaces lack sufficient texture for robust photogrammetry—particularly in individuals with uniform skin tone, low lighting, or smooth anatomical profiles. To address these limitations, this thesis introduces two key innovations that significantly enhance the quality of 3D reconstructions obtained from smartphone videos: (1) optimal camera angle determination and (2) multi-illumination pattern projection for surface texture augmentation.
+
+--Optimized Overhead Angle for Maximum Anatomical Visibility--
+Through extensive empirical testing, a precise optimal angle for smartphone placement was identified. Multiple videos were recorded at varying angles and heights to evaluate which configuration yielded the highest-quality 3D meshes. Factors such as shadow formation, landmark visibility, and reconstruction stability were considered. The final recommended angle was found to maximize the exposure of important anatomical features—such as the spinal groove, scapular outlines, and lumbar indentation—while minimizing distortion or occlusion.
+ To ensure consistency across users, this angle is guided either via a physical mounting guide or a software-based user interface overlay on the recording device. In the case of a mobile app, a real-time feedback system prompts users to adjust the phone orientation until it aligns with the optimal capture angle. This guidance ensures that even non-experts can produce clinically useful input data, expanding the reach of scoliosis screening into homes and remote areas.
+
+
+--Multi-illumination Pattern Projection--
+The second innovation addresses a critical limitation in monocular 3D reconstruction of the human back—namely, the lack of sufficient surface texture on skin, which leads to poor feature matching and reduced reconstruction accuracy. To overcome this, the proposed method combines controlled illumination with structured pattern projection during video capture to artificially enhance surface detail and improve photogrammetric reliability.
+ In this method, the lighting setup is carefully configured to produce uniform illumination with standardized parameters such as intensity, directionality, and color temperature (e.g., warm white or soft yellow). These conditions are optimized to highlight spinal anatomical features like the spinal groove, shoulder contours, and lumbar curvature, without introducing harsh shadows or glare. By providing consistent and diffuse lighting across frames, this approach ensures high visibility of depth cues even in naturally low-contrast regions of the skin.
+ To further support feature extraction, predefined visual patterns—such as grids, dots, or structured lines—are projected onto the subject’s back during recording. These patterns act as synthetic surface features, allowing photogrammetry algorithms to perform more accurate frame-to-frame alignment and surface matching. This enhancement is particularly effective in regions with uniform skin tone or minimal natural texture, where conventional reconstruction techniques often fail.
+
+-- Patent Submission and Recognition of Novelty--
+The two core innovations detailed here, the optimized angle-based video acquisition method and the structured pattern projection using a flashlight-mounted lens attachment, represent significant advancements in the domain of noninvasive scoliosis assessment. Recognizing their originality, practical utility, and potential for wide-scale deployment, these contributions were formally submitted as part of a Level 4 patent application.
+ The decision to file the patent at this stage not only protects the intellectual property developed through our proposed methods, but also underscores the translational impact of this research: from an academic prototype to a deployable mobile solution in healthcare diagnostics. The successful submission further affirms the unique contributions of this work in advancing the state-of-the-art in mobile vision-based scoliosis assessment.
+
+
+3 --Pipeline for 3D Reconstruction--
+3.1 --Preprocessing: Segmentation of Input Frames--
+In raw video captures, especially those recorded in uncontrolled environments, background distractions such as walls, furniture, shadows, or even clothing wrinkles can interfere with photogrammetry-based methods like COLMAP or deep learning-based models like VGGT. These distractions often introduce false correspondences during Structure from Motion or confuse neural attention mechanisms in transformer models, resulting in distorted or noisy outputs.
+ To address this, each frame was passed through a SAM 2 (Segment Anything Model 2 by Facebook research) segmentation model to generate a binary mask that distinguishes the subject’s back from the rest of the image. The masked region was retained while the rest of the image was replaced with a uniform background. In this work, a white mask was used to replace the background, as opposed to a black mask. This decision was based on experimental findings with VGGT, where black-masked backgrounds caused gradient suppression and border-related artifacts during mesh prediction. White backgrounds, by contrast, maintained boundary clarity and improved the consistency of volumetric feature encoding, leading to cleaner reconstructions.
+
+3.2 -- Structure from Motion (SfM): An Overview--
+Structure from Motion (SfM) is a fundamental computer vision technique used to reconstruct 3D structure from a set of unordered 2D images captured from varying viewpoints. It jointly estimates both the camera parameters (pose and intrinsics) and the 3D coordinates of scene points by identifying feature correspondences across multiple views. SfM forms the geometric backbone of classical reconstruction pipelines such as COLMAP and OpenSfM.
+ The core idea behind SfM is to detect key points in overlapping image frames, match them across views, estimate relative camera poses, and triangulate the corresponding 3D points observed in multiple views.
+
+--SfM Output--
+The output of a typical SfM process includes:
+• A sparse 3D point cloud representing key visual features in the scene.
+• Estimated intrinsic and extrinsic parameters for each camera frame.
+• A visibility map showing which 3D points are observed in which images.
+This sparse reconstruction provides a reliable geometric scaffold for further dense surface recovery using Multi-View Stereo (MVS) methods, and remains a core component in most classical 3D reconstruction pipelines.
+
+3.3 --Monocular3DReconstruction using Structure from Motion--
+Three-dimensional (3D) reconstruction is a fundamental problem in computer vision that involves recovering the geometric structure of a scene from a series of two-dimensional (2D) images or video frames. In the context of scoliosis assessment, this process converts a monocular video of a human back—captured using a single smartphone camera—into a 3D mesh that accurately represents the subject’s surface anatomy. By analyzing deviations in the reconstructed spinal surface, it becomes possible to estimate the severity and profile of spinal curvature.
+ Among various 3D reconstruction paradigms, Structure from Motion (SfM) has emerged
+as one of the most robust and widely used techniques for recovering 3D geometry from unordered image sequences. SfM identifies visual correspondences across frames, estimates camera poses, and triangulates matched points to produce a sparse 3D point cloud. When combined with Multi-View Stereo (MVS) algorithms, this cloud is densified and transformed into a full 3D mesh suitable for clinical analysis.
+ The proposed work adopts a modular reconstruction pipeline comprising three widely-used, open source components: COLMAP, OpenSfM, and OpenMVS. Each plays a specific role in the process, and their combination provides robustness and flexibility across input formats. This chapter outlines the architecture of this pipeline, including preprocessing, feature extraction, camera calibration, point cloud generation, and mesh construction.
+
+ 3.4 --Overview of Tools Used--
+1. COLMAP
+COLMAP is a state-of-the-art Structure-from-Motion and Multi-View Stereo pipeline that supports both incremental and global SfM strategies. It accepts unordered image sequences and automatically performs feature detection, matching, and sparse point cloud generation. It is particularly known for its efficient GPU-accelerated implementation of SIFT feature extraction, and its ability to estimate camera intrinsics and extrinsics using bundle adjustment.
+
+2. OpenSFM
+While COLMAP and OpenSfM primarily generate sparse reconstructions, accurate scoliosis assessment demands a dense, watertight mesh of the subject’s back. This is where OpenMVS (Open Multi-View Stereo) becomes critical. OpenMVS takes the calibrated camera poses and sparse point cloud from the SfM stage and performs depth map estimation for each camera view, then fused depth map merging into consistent dense point cloud, further mesh refinement and texturing can also be done if desired.
+
+3. OpenMVS
+OpenMVS provides highly detailed and accurate meshes, which are essential for detecting subtle deviations in spinal curvature. It also includes utilities to visualize and filter noisy or incomplete reconstructions, thus improving the reliability of the final output.
+
+3.5 --3D Point cloud generation--
+A point cloud, composed of 3D coordinates representing visible features in a scene, is a critical intermediate step in any 3D reconstruction pipeline. In our proposed work, point clouds are derived from overlapping frames of a monocular video by triangulating features tracked across multiple views using estimated camera poses. They form the foundation for generating surface meshes used in spinal curvature analysis. Based on reconstruction granularity, point clouds are categorized as either sparse—produced during initial Structure from Motion—or dense, refined through Multi-View Stereo; both are essential and discussed in the following subsections.
+
+3.5.1 --Sparse Point Cloud Reconstruction--
+The sparse point cloud represents the first stage of geometric recovery in the pipeline. It is generated as part of the Structure from Motion (SfM) process, where the 3D coordinates of salient image features are triangulated based on their projections in multiple frames and the relative positions of the camera:
+• Feature Detection: Key points are extracted from each frame using algorithms
+ such as SIFT (in COLMAP) or HaHOG (in OpenSfM).
+• Feature Matching: Key points are matched across image pairs to establish correspondence sets.
+• Camera Pose Estimation: The camera intrinsic parameters (focal length, principal point) and extrinsic parameters (rotation, translation) are estimated using bundle adjustment.
+• Triangulation: 3D coordinates are computed by solving geometric constraints across multiple views where a point is visible.
+While sparse point clouds do not capture the full surface geometry, they provide a robust initial estimate of camera parameters and scene structure, which are essential for down stream dense reconstruction. In this work, sparse reconstruction was primarily performed using COLMAP, with OpenSfM used for alternative trials.
+
+3.5.2 --Dense Point Cloud Reconstruction--
+The dense point cloud is a much richer representation that captures fine-grained surface geometry, essential for detailed medical analysis such as scoliosis severity estimation. Once the sparse point cloud and camera poses are established, dense reconstruction is performed using Multi-View Stereo (MVS) algorithms.
+The pipeline used for dense point cloud generation includes:
+• Depth Map Estimation: For each frame, a depth map is computed that estimates the distance from the camera to each pixel based on multi-view consistency.
+• Depth Fusion: The per-view depth maps are merged into a global point cloud by identifying consistent points across views and eliminating outliers
+• Filtering and Densification: Additional algorithms remove noise and interpolate
+missing regions to produce a more complete and smooth surface.
+The dense point cloud typically contains thousands to millions of points, each accurately localized in 3D space. It captures fine details of the subject’s back, including subtle deviations in the spinal surface that may not be visible in sparse reconstructions. This level of detail provides sufficient resolution for downstream tasks such as fitting anatomical planes, computing spinal curvature, and extracting the spinal centerline for analysis.
+ Colmap and OpenMVS both were used for dense reconstruction due to superior accuracy and mature implementation.
+
+3.6 --Volumetric Geometry-Guided Transformer (VGGT)--
+Volumetric Geometry-Guided Transformer (VGGT) is a transformer-based framework
+for 3D reconstruction that directly predicts camera poses and dense geometry from a set of multi-view images. Unlike classical SfM pipelines that rely on feature matching and triangulation, VGGT adopts a transformer-based attention mechanism that models both global and per-frame context to estimate scene structure holistically. 
+ In the overall pipeline, each input image is divided into patches and processed through a shared backbone network (e.g., DINO-ViT) to extract high
+dimensional visual features. These features are concatenated across views and passed through a hierarchical attention structure consisting of global and frame-level attention modules.
+
+3.6.2 --VGGT generated output--
+In the proposed work, VGGT was employed as a comparative baseline against the COLMAP + OpenMVS pipeline. Input videos were converted into RGB frame sequences and resized per VGGT requirements. Camera parameters were estimated using COLMAP and passed to VGGT’s reconstruction model for generating the output 3d reconstruction.
+
+3.7 --Mesh Generation--
+In this work, mesh generation is essential for transforming the dense point cloud of the subject’s back into a continuous, watertight surface suitable for scoliosis evaluation. Accurate detection of spinal deviations from the central sagittal plane requires high-resolution, smooth, and anatomically precise geometry. Although dense point clouds contain rich spatial data, they lack the structural connectivity needed for tasks like curvature analysis, centerline extraction, and deviation measurement. Therefore, generating a structured surface mesh is a crucial step toward enabling reliable scoliosis detection.
+
+3.7.1 --Mesh Generation Using OpenMVS--
+To convert the dense point cloud into a high-quality 3D surface mesh suitable for scoliosis assessment, this thesis uses the OpenMVS (Open Multi-View Stereo) framework. OpenMVS takes the camera poses, sparse model, and dense point cloud generated from COLMAP or OpenSfM and produces a triangulated surface mesh through a multi-step process. The process involves the following key stages:
+1. Input Preparation
+OpenMVS takes input from SfM pipelines like COLMAP or OpenSfM which are:
+• calibrated camera poses
+• Sparse reconstruction model
+• Dense point cloud
+2. Densification: Densify Point Cloud Module
+• Enhances the initial dense point cloud by enforcing multi-view geometric consistency
+• Fills in surface gaps and refines under-sampled regions.
+• Especially crucial for smooth, low-texture areas like the human back.
+• Ensures better anatomical coverage for downstream analysis.
+3. Mesh Construction: Reconstruct Mesh Module
+• Estimates local surface normals from the densified point cloud.
+• Uses neighborhood-based triangulation to build a connected triangle mesh.
+• Captures key anatomical features like Spinal curvature, Shoulder blade contours and Subtle surface deformations
+4. Mesh Refinement: Refine Mesh Module
+• Smooths the raw mesh to eliminate minor geometric artifacts.
+• Applies Laplacian surface optimization to preserve clinically relevant shapes while removing noise.
+• Performs hole filling in low-density areas to ensure the mesh is watertight and continuous.
+5. Final Output
+• Produces a clean, topologically consistent 3D mesh representing the subject’s back
+• Serves as the final geometric structure used for scoliosis evaluation.
+• Texture Mesh module (for photorealistic texturing) was not used, as the focus
+ is on geometry rather than appearance.
+
+3.8 --Pipeline Execution and Final Mesh Output--
+This section presents a comprehensive summary of the practical implementation under
+taken in the proposed work—from raw video acquisition to the generation of high-quality 3D surface meshes. While earlier sections focused on the theoretical foundations and component-wise functions of SfM and MVS tools, this section integrates all those steps into a single coherent workflow that was executed repeatedly to generate real-world reconstruction outputs of the human back. This end-to-end pipeline forms the core contribution of our proposed work and directly enables future diagnostic applications such as scoliosis severity assessment.
+
+3.8.1 --Complete Workflow Pipeline--
+The complete pipeline implemented as part of this work can be summarized in the following sequential stages:
+1. Video Acquisition
+Monocular videos of the human back were captured using a standard smartphone at 1080p resolution and 30 FPS. Subjects adopted a forward-bend posture with dropped shoulders to highlight the spinal region. Videos were recorded under three configurations: varying camera angles, lighting conditions, and pattern projection settings.
+2. Segmentation using SAM 2
+The video is processed to SAM 2 model where we use white binary mask to segment
+out the subject from the input frames/video
+3. Structure-from-Motion (SfM)/ VGGT 3d reconstruction
+Depending on the reconstruction strategy, input frames were processed using either
+COLMAP / OpenSfM (classical SfM-based pipeline) or VGGT (a transformer-based deep learning model). SfM methods perform feature extraction, matching, and camera pose estimation to generate sparse point clouds and calibrated trajectories, while VGGT directly infers dense geometry using volumetric transformers. Both approaches are integrated in our work to enable comparative analysis of traditional and learning based 3D reconstruction techniques for scoliosis assessment.
+4. Mesh Generation and Refinement
+Dense point clouds were converted into triangle meshes using the Reconstruct Mesh
+module. The Refine Mesh module improved surface continuity, eliminated holes, and smoothed irregularities. Final meshes were exported in .ply format for further analysis or visualization.
+5. Mesh output
+The resulted mesh will be the output for this pipeline.
+The entire pipeline was designed to be modular, allowing individual components to be tuned or replaced based on experimental needs. For traditional reconstruction, COLMAP served as the primary SfM backend due to its robustness and maturity, while OpenSfM was used selectively to evaluate matching performance on low-texture subjects. For dense reconstruction and mesh generation, OpenMVS was employed. In parallel, the deep learning based VGGT model was integrated as an alternative to the classical SfM-MVS pipeline, enabling a comparative study between geometry-driven and transformer-based 3D reconstruction approaches within the context of scoliosis assessment.
+
+4 --Conclusion and Future Work--
+4.1 --Conclusion--
+This whole of our proposed work presents a complete and modular pipeline for non-invasive scoliosis assessment using smartphone-based monocular video input and 3D reconstruction techniques. The proposed system begins with a robust video acquisition framework that standardizes subject posture, camera positioning, and lighting conditions. It further introduces two key innovations: (1) an empirically determined optimal camera angle for capturing spinal anatomy, and (2) a structured pattern projection approach under controlled illumination to enhance surface texture and feature visibility. These input-level enhancements were crucial in improving reconstruction reliability, particularly for smooth, low-texture skin regions.
+ On the reconstruction side, the thesis implements and compares two distinct paradigms: a classical SfM-MVS pipeline using COLMAP, OpenSfM, and OpenMVS, and a learning based pipeline using VGGT (Volumetric Geometry Guided Transformer). Both were used to generate high-fidelity surface meshes of the subject’s back. The pipeline includes preprocessing steps such as frame extraction and segmentation, the latter of which proved vital in removing background artifacts and improving the quality of mesh outputs. Special attention was given to the use of white masks instead of black backgrounds, particularly to reduce reconstruction artifacts in VGGT.
+ While traditional image-based evaluation metrics like PSNR, SSIM, or IoU are commonly used in image processing and depth estimation tasks, they were not applied in this work for a deliberate reason. Classical SfM pipelines do not produce per-frame or per-pixel  confidence scores or reconstruction metrics. Moreover, the primary output of our work is a 3D surface mesh intended for downstream anatomical analysis, where visual completeness, anatomical fidelity, and structural consistency are of greater relevance. Therefore, evaluation in this work was conducted through qualitative comparison of output meshes under varying input conditions, rather than through standardized numerical metrics.
+ Overall, our work contributes a validated, end-to-end framework capable of producing clean, watertight 3D meshes from monocular videos with minimal hardware and no radiation exposure. These meshes serve as the foundation for future scoliosis analysis.
+
+4.2 --Future Work--
+The current thesis focuses on building a robust 3D reconstruction pipeline and validating its performance in producing high-quality surface meshes of the human back. However, the final goal of this work is to facilitate non-invasive, automated scoliosis assessment using these reconstructed surfaces.
+ In future work, the following directions will be pursued:
+• Spinal Centerline Estimation: Develop algorithms to extract the spinal center
+line from the generated mesh and fit it to an ideal sagittal reference plane.
+• Curvature Deviation Metrics: Compute deviation angles, curve classification, and asymmetry indices directly from the mesh geometry.
+• Severity Classification: Train and validate models for Cobb angle approximation or scoliosis severity grading using the extracted geometric features.
+• Quantitative Validation: If access to radiographic datasets or synthetic ground
+truth models becomes available, integrate quantitative error metrics for mesh-to
+mesh or curvature comparison.
+• Real-Time Mobile Deployment: Optimize the pipeline for deployment on smart
+phones or edge devices for use in clinical and at-home screening scenarios.
+ Through these enhancements, the pipeline can be extended into a full-fledged scoliosis diagnostic system, offering accurate, safe, and accessible assessments using just a mobile phone.
+
+
+--Idea 1--
+--Abstract--
+The invention describes a user-interface-based method for accurately assessing spine deformation (e.g. scoliosis, kyphosis etc.) severity through mobile-device video recording. It employs real-time visual indicators guiding users to position their smartphones at an empirically determined optimal overhead angle. This approach enhances the consistent visibility of anatomical landmarks, reduces geometric distortions in the resultant 3D mesh, and improves overall reconstruction accuracy. By standardizing device positioning relative to subjects, it facilitates precise scoliosis evaluation without reliance on invasive imaging methods. Experimental validation confirms significant improvements in the accuracy of spinal curvature assessments, offering a 
+reliable, non-invasive alternative suitable for clinical and home settings.
+
+--Use case--
+Healthcare providers and patients can utilize this intuitive UI-based angle guidance method for consistent and precise scoliosis monitoring at home or in clinical environments. The mobile app’s real-time indicators enable users to record accurate overhead videos of spinal curvature effortlessly, ensuring reliable 3D reconstruction and minimizing assessment errors, thus facilitating regular, safe, and convenient tracking of scoliosis progression without frequent hospital visits or radiographic exposure. 
+
+--keywords--
+User Interface, Optimal Angle, Smartphone Application, Real-time Guidance, 3D Reconstruction, 
+Non-invasive Assessment, Spinal Curvature, Scoliosis Monitoring, Computer Vision, Mobile Health.
+
+Video recording at an optimal recording angle helps identifies a precise overhead angle for capturing spinal features crucial for scoliosis assessment.
+
+Real-time UI guidance: provides dynamic visual cues to help users maintain the ideal camera angle during recording
+
+Reduced Geometric Distortion standardizes phone positioning to minimize distortion in 3D reconstructions
+
+and Senor-based feedback utilizes the phone's gyroscope and accelerometer to track orientation and guide users in real time.
+
+First, we get the area of intersection (AOI) between a pre-recorded baseline model with the human back that is being recorded (before overlap checking the human back will be segmented), with this AOI we can indicate the user about the direction to move the phone in:
+• If AOI lacks head region, direct up 
+• If AOI lacks lower region, direct down 
+• If AOI lacks side region and segmentation mask is on left, direct right 
+• If AOI lacks side region and segmentation mask is on right, direct left 
+
+Utilizing the built-in gyroscope or other real-time 
+feedback sensors can further aid in getting optimal 
+angle by guiding user about rotation/tilting of phone to further refine the process 
+
+The invention and app involves:
+
+Empirical Determination of Optimal Recording Angle: 
+Methods to determine a specific top-down angle that is best for recording videos of the human back as it covers max area while helping to clearly show important spine features in the 3d reconstruction for spine deformation (e.g. scoliosis).
+ 
+Real-time UI Guidance: 
+The app shows helpful, real-time instructions and directions on the screen to guide users in holding the phone at the right angle while recording by aiding in phone placement. This helps get more accurate and consistent videos. 
+
+Reducing Shape Errors in 3D Models: 
+By keeping the phone almost at the same angle while recording a video, the system reduces shape distortions in the 3D human back models, making spine deformation (e.g. scoliosis, kyphosis etc. measurements more reliable. 
+
+Sensor-Based Feedback: 
+Leverages the smartphone’s built-in gyroscope and accelerometer to continuously track the device's orientation and position in real time. If the phone isn’t at the right angle, the app gives suggestions to adjust it, making the process more precise. 
+
+the app involves several inventive steps that are non-obvious to individuals skilled in related fields:
+
+Empirical Optimization of Camera Angle: 
+Utilizing a pre-recorded baseline human back mesh we can estimate the overlap with the human back that is to be recorded to get area of intersection (AOI). We 
+can use AOI to get an idea about where to guide the user for covering maximum area (we can use the max AOI values that are recorded in phone while we are 
+scanning the human back to further aid in guiding). This method ensures max area is covered ensuring better 3d generation.  
+
+Integration of Real-time User Guidance Interface: 
+the addition of real-time visual feedback indicators (like build in gyroscope in mobiles), specifically guiding users to rotate/tilt phones for achieving and 
+maintaining this optimal angle, significantly improves usability and accuracy better than all other handheld methods. 
+
+Mobile-based Application for Medical Precision: 
+integration of this in smartphone app will allow more user to conduct spine deformation (e.g. scoliosis, kyphosis etc.) analysis along with the obvious 
+increase in quality of the video taken and the subsequent 3d reconstruction 
+
+Real-time UI-based Guidance: 
+Unlike prior ideas that only specify ideal angles theoretically or assume correct user positioning, this idea actively guides users through real-time visual indicators on their smartphones. This interactive element ensures consistent user compliance, directly improving the accuracy and reproducibility of spinal curvature assessment
+ 
+2. Empirically Optimized Recording Angle: 
+While existing ideas propose generic angles or camera positioning guidelines, this current idea uniquely incorporates extensive empirical testing to determine the precise optimal overhead angle, specifically validated for maximum anatomical detail visibility and minimal geometric distortion, significantly enhancing the reliability of medical imaging outcomes
+ 
+3. Mobile-device Adaptability for Clinical Precision: 
+This idea specifically targets everyday smartphone use, making clinical-level spine deformation (e.g. scoliosis) assessments accessible in both home and professional environments without requiring specialized hardware, setting it apart from comparable inventions that rely heavily on specialized or professional-grade imaging 
+equipment.
+
+Has the ideas been tested experimentally? Are experimental data available?
+Yes, 3D  modelling of various videos and input samples have been tested
+
+
+--Need and demand--
+The idea addresses critical gaps in existing non-invasive scoliosis assessment technologies, which often suffer from inconsistent imaging due to variable camera angles and user-dependent errors. Traditional assessment methods, like repeated X-rays, expose patients to harmful radiation, whereas current smartphone-based solutions lack standardized 
+guidelines, compromising accuracy. The demand for this invention arises from the healthcare industry's pressing need for precise, reproducible, and user-friendly tools enabling regular 
+and safe monitoring of spinal deformities. A mobile application providing intuitive, real-time angle guidance for accurate home-based or clinical assessments significantly meets this unmet market demand. 
+
+Market access information
+The mobile health market is expanding rapidly, with strong demand for guided smartphone based diagnostic tools. 
+
+Future Developments
+(Scope of future technology development and their application) 
+Future developments of this technology could involve enhancing the precision and adaptability of real-time UI guidance through advanced machine learning algorithms capable of dynamically adjusting the recommended angle based on individual anatomical differences. Additionally, integrating augmented reality (AR) techniques could provide intuitive 3D visual overlays, further simplifying user interactions and improving user compliance. Extending the application for monitoring other posture-related conditions or spinal disorders beyond scoliosis could substantially broaden the scope and impact of the invention, benefiting wider clinical and preventive healthcare markets.
+
+
+Applications of the idea
+The idea finds practical applications in clinical and home-based healthcare settings, providing a user-friendly smartphone application for accurate and non-invasive scoliosis monitoring. Healthcare professionals can regularly assess spinal curvature without repeated exposure to harmful radiation, facilitating ongoing patient management and intervention planning. Additionally, the app can empower patients and caregivers to reliably track scoliosis progression at home, enabling informed decision-making, reducing frequent hospital visits, 
+and supporting telehealth consultations for remote patients or underserved regions.
+
+
+Question: Why should the individual(s)/organization may consider procuring this innovation? 
+Answer: Individuals and organizations should consider procuring this innovation due to its capability to significantly enhance accuracy, consistency, and ease-of-use in spine deformation (e.g. scoliosis) assessment through intuitive, smartphone-based real-time guidance. This solution reduces reliance on invasive radiographic procedures, thus minimizing patient exposure to radiation. It also promotes efficient monitoring in home or clinical settings, 
+streamlining clinical workflows, reducing costs associated with repeated hospital visits, and improving patient compliance. Consequently, this innovation provides considerable clinical and economic value by ensuring reliable spinal curvature assessments accessible to broader patient populations. 
+
+--Idea 2 and 3--
+--Abstract--
+The idea presents a method to enhance 3D reconstruction accuracy for scoliosis assessment by utilizing controlled illumination and structured pattern projection during smartphone-based video capture. By standardizing lighting intensity, directionality, and color temperature (e.g., warm white, yellow), the visibility of spinal anatomical features is significantly improved. Projected 
+patterns—such as grids or dots—further assist in surface tracking and frame alignment, particularly on low-texture skin regions. This integrated approach 
+improves the reliability and consistency of mesh generation, resulting in reduced error rates in scoliosis severity estimation. Experimental validation demonstrates its superiority over conventional non-invasive imaging methods, especially in varied real-world environments.
+
+--Use case--
+Clinicians and individuals can use this technique to perform consistent and accurate scoliosis assessments using just a smartphone. Controlled lighting—adjusted for color and intensity and projected patterns on the subject’s back ensure clear anatomical visibility and improved 3D surface tracking. This setup supports reliable and repeatable assessments in clinics, homes, or remote areas without requiring specialized equipment, making it ideal for routine evaluations, telehealth applications, and patient self-monitoring.
+
+--keywords--
+Controlled Illumination, Pattern Projection, Color-Adjusted Lighting, Texture Matching, Anatomical 
+Feature Enhancement, Smartphone Imaging, Frame Alignment, 3D Mesh Accuracy, Non-invasive Medical Imaging, Scoliosis Assessment, Mobile Health Technology, Structured Surface Tracking
+
+We can use smart phone and create masked patterns attached to smart phones and obtain the same masked patterns in the human back
+
+The invention and app involves:
+Standardized Controlled Illumination: 
+Establishes lighting parameters—including intensity, direction, color, and ambient conditions—specifically optimized to enhance the visibility of spinal anatomical features. This enables detailed data to be captured which in turn improves the accuracy of 3D 
+reconstructions. 
+
+Pattern Projection: 
+Novel use of projected patterns (e.g., lines or shapes) onto the subject’s back to artificially enhance surface texture. This approach offers significant improvements in reconstruction reliability 
+
+Enhanced Frame Matching and Mesh Accuracy: 
+This combined approach distinctly enhances the accuracy and reliability of frame matching algorithms during 3D reconstruction, improving the robustness and precision of spine deformation (e.g. scoliosis) assessments.  
+
+The original process flowchart is as:
+human back --> video recording using hand-held methods -->segmentation of human back --> 3D reconstruction and meshes --> Asymmetry analysis of spine --> final metric indicating severity of scoliosis (if any)
+
+and our proposed process flowchart is as:
+human back --> Our idea/novelty --> video recording using hand-held methods -->segmentation of human back --> 3D reconstruction and meshes --> Asymmetry analysis of spine --> final metric indicating severity of scoliosis (if any)
+
+The Current invention comprises several inventive steps which are non-obvious to practitioners in related fields: 
+• Controlled Illumination: 
+Standardizing illumination intensity, direction, an ambient conditions—along with experimenting with different light colors (e.g., warm white, yellow)—enhances anatomical landmark visibility for accurate scoliosis assessment. Such fine-tuned lighting control in a mobile setup is novel and highly application specific. 
+
+• Pattern Projection (for Improved 3D Reconstruction): 
+Projecting structured patterns (e.g., shapes, lines) onto the subject’s back introduces artificial surface features that aid further in 3d reconstruction. This improves frame-to frame alignment and surface tracking, which in turn aids in better 3D generated output.
+ 
+• Integrated Robustness for Mobile Use: 
+The integration of both these idea in smartphones will not only enhance the 3d output but also enables users to get utilize the benefits in their local device with ease and effectiveness.
+
+The current invention demonstrates substantial advantages over comparable inventions:
+ 
+1. Combined Standardized Illumination and Pattern Projection: 
+While existing patents often rely on uncontrolled lighting or basic structured illumination, this invention uniquely integrates rigorously standardized lighting conditions—covering intensity, directionality, ambient levels, and use of varied light colors (e.g., warm white, yellow)—with structured pattern projection. This significantly 
+enhances anatomical landmark visibility and surface detail capture during video acquisition for 3D reconstruction. 
+
+2. Non-contact Pattern Projection for Surface Enhancement: 
+Unlike prior approaches requiring complex hardware, this invention introduces structured patterns (such as grids or dots) directly onto the subject’s back to serve as artificial surface textures. These patterns improve frame-to-frame alignment and feature tracking, especially in uniform or low-texture skin conditions, without the need for invasive or expensive projection systems. 
+
+3. Improved Reconstruction Robustness in Mobile Platforms: 
+The combination of color-optimized illumination and structured pattern projection is specifically designed for smartphone-based scoliosis assessment, enabling robust 3D reconstruction in real-world conditions. This integrated approach significantly 
+outperforms existing non-invasive mobile imaging methods in terms of mesh consistency, usability, and diagnostic reliability. 
+
+Need and demand
+(Technology gaps addressed in domestic & international markets, pain points of Industry which are being resolved) 
+This idea addresses critical gaps in mobile-based medical imaging, particularly in smartphone-enabled scoliosis assessments where inconsistent lighting and lack of surface features hinder accurate 3D reconstruction. Current methods often suffer from poor anatomical visibility due to uncontrolled illumination and smooth, low-texture skin surfaces. 
+The invention introduces standardized illumination parameters—including intensity, direction, and light color—and the use of projected visual patterns to enhance feature tracking and frame alignment. These innovations significantly improve the reliability and diagnostic accuracy of mobile-based 3D mesh reconstruction. The solution meets growing global 
+demand for affordable, accessible, and clinically reliable scoliosis monitoring across both clinical and home settings.
+
+Future Developments 
+(Scope of future technology development and their application) 
+Future advancements may involve developing adaptive illumination systems that dynamically adjust light intensity, color, and direction based on real-time environmental feedback, further enhancing consistency in 3D reconstructions. Structured pattern projection could evolve to use dynamically generated patterns tailored to individual anatomical features and skin tones, potentially guided by machine learning algorithms. Additionally, integrating advanced 
+computer vision and deep learning techniques—such as transfer learning, self-supervised learning, and multimodal imaging—can expand the system’s capabilities to support other medical imaging applications, including posture analysis, wound monitoring, and dermatological assessments, thereby increasing its utility in broader healthcare contexts.
+
+Application/s of the invention  
+This invention is broadly applicable in healthcare settings, including clinical, home-based, and remote environments that require accurate anatomical assessments using smartphone imaging. The use of standardized illumination—with adjustable intensity and color—and structured pattern projection enhances 3D reconstruction reliability, significantly improving the precision of scoliosis evaluations. It supports consistent, repeatable assessments without the need for specialized equipment. Additionally, this approach can be extended to other medical 
+imaging applications, such as dermatological analysis, wound monitoring, and musculoskeletal assessment, by providing consistent lighting and artificial surface features crucial for capturing fine anatomical details.
+
+Question:  Why should the individual(s)/organization may consider procuring this innovation? 
+Answer: Organizations and individuals should procure this innovation because it substantially improves the reliability and accuracy of smartphone-based medical imaging through controlled illumination and structured pattern projection. These features ensure consistent anatomical feature visibility and precise 3D reconstruction, even in challenging low-contrast 
+or uniform skin conditions. The invention’s simplicity and affordability, due to smartphone 
+compatibility and ease of external accessory integration, enable rapid adoption across 
+diverse healthcare settings. Ultimately, this leads to improved diagnostic precision, enhanced patient outcomes, reduced operational costs, and broader accessibility to accurate, non-invasive medical assessments. 
